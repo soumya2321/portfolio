@@ -1,173 +1,215 @@
-import React, { useState } from 'react';
-import { FileText, Download, ExternalLink, CheckCircle2, GraduationCap, Code2, Briefcase, Award, Upload } from 'lucide-react';
+import React from 'react';
+import { FileText, Download, ExternalLink, CheckCircle2, GraduationCap, Code2, Briefcase, Award, Upload, Cloud, Cpu, Trophy, Terminal } from 'lucide-react';
 
 export default function ResumeSection({ resumeUrl, setResumeUrl }) {
-  const [activeTab, setActiveTab] = useState('summary'); // 'summary', 'timeline'
-
-  const handleResumeUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setResumeUrl(url);
-    }
-  };
+  const defaultResume = "/resume.pdf";
 
   return (
-    <section className="rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-6 md:p-8 shadow-2xl">
+    <section className="rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-6 md:p-8 shadow-2xl space-y-8">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <div className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400">
               <FileText className="w-5 h-5" />
             </div>
             <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-              Resume & Technical Profile
+              Resume & Verified Qualifications
             </h2>
           </div>
           <p className="text-xs md:text-sm text-slate-400">
-            Requirement 3/4: Comprehensive background, education, and technical experience.
+            Requirement 3/4: Official resume of Soumya Sahukar (Computer Science & Engineering).
           </p>
         </div>
 
         {/* Action Controls */}
         <div className="flex items-center gap-3">
-          <label className="cursor-pointer px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors">
-            <Upload className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Upload PDF Resume</span>
-            <input type="file" accept=".pdf" onChange={handleResumeUpload} className="hidden" />
-          </label>
+          <a
+            href={defaultResume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Preview PDF</span>
+          </a>
 
           <a
-            href={resumeUrl || "#"}
-            download="Resume.pdf"
-            className="px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shadow-md"
+            href={defaultResume}
+            download="Soumya_Sahukar_Resume.pdf"
+            className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-cyan-900/30"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Download Resume</span>
+            <span>Download Official PDF</span>
           </a>
         </div>
       </div>
 
-      {/* Grid Overview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Grid Row 1: Experience & Projects */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        {/* Education & Core Card */}
+        {/* Work Experience */}
         <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
-          <div className="flex items-center gap-2 text-cyan-400">
-            <GraduationCap className="w-5 h-5" />
-            <h3 className="text-sm font-bold text-white">Education</h3>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between text-xs text-cyan-400 font-mono">
-              <span>B.E. / B.Tech</span>
-              <span>2023 - 2027</span>
+          <div className="flex items-center justify-between text-cyan-400 border-b border-slate-800/80 pb-3">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-5 h-5" />
+              <h3 className="text-sm font-bold text-white">Work Experience</h3>
             </div>
-            <h4 className="text-sm font-bold text-white leading-snug">
-              Nagarjuna College of Engineering and Technology
-            </h4>
-            <p className="text-xs text-slate-400">
-              Computer Science & Engineering / AI & Technology focus.
-            </p>
+            <span className="text-[10px] font-mono uppercase bg-cyan-500/10 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/20">2 Internships</span>
           </div>
 
-          <div className="pt-2">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-purple-400" />
-              Key Highlights
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 shrink-0" />
-                <span>Polymath builder approach across Web Dev, AI, and UI/UX design.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
-                <span>Active hackathon participant and full-stack software engineer.</span>
-              </li>
-            </ul>
+          <div className="space-y-4">
+            
+            <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-white">Machine Learning Intern</h4>
+                <span className="text-[10px] font-mono text-purple-400">Dec 2025 – Feb 2026</span>
+              </div>
+              <span className="text-xs text-indigo-300 font-semibold block">Infosys</span>
+              <ul className="space-y-1 text-xs text-slate-400 list-disc list-inside">
+                <li>Engineered 50+ features and applied SMOTE to address class imbalance in ML datasets.</li>
+                <li>Built FastAPI prediction API with sub-second inference for real-time habitability prediction.</li>
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-white">AWS Cloud Intern</h4>
+                <span className="text-[10px] font-mono text-cyan-400">Jan 2026 – May 2026</span>
+              </div>
+              <span className="text-xs text-cyan-300 font-semibold block">Toriiminds</span>
+              <ul className="space-y-1 text-xs text-slate-400 list-disc list-inside">
+                <li>Architected AWS cloud infrastructure, deploying 10+ EC2 instances and IAM policies.</li>
+                <li>Configured Virtual Private Clouds (VPCs) and optimized storage, reducing costs by 15%.</li>
+              </ul>
+            </div>
+
           </div>
         </div>
 
-        {/* Tech Stack Matrix */}
+        {/* Featured Projects */}
         <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
-          <div className="flex items-center gap-2 text-purple-400">
+          <div className="flex items-center justify-between text-indigo-400 border-b border-slate-800/80 pb-3">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-5 h-5" />
+              <h3 className="text-sm font-bold text-white">Featured Projects</h3>
+            </div>
+            <span className="text-[10px] font-mono uppercase bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/20">3 Projects</span>
+          </div>
+
+          <div className="space-y-3">
+            
+            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-white">Predicting Habitability of Exoplanets</h4>
+                <span className="text-[10px] text-purple-400 font-mono">99% Accuracy</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                ML model using NASA Exoplanet dataset (40K rows, 90+ columns) with Class-Weighted SVM & real-time FastAPI + React dashboard.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-white">Blood Bank Management System</h4>
+                <span className="text-[10px] text-cyan-400 font-mono">500+ Donors</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                Database application managing donor records & inventory, reducing manual errors by 30% with &lt; 2s lookup speed.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-white">Soil Moisture-Based Irrigation System</h4>
+                <span className="text-[10px] text-emerald-400 font-mono">Arduino IoT</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                Automated water pump controls via moisture sensors and relay modules, cutting water consumption by 40%.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      {/* Grid Row 2: Skills, Certifications & Achievements */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Technical Skills */}
+        <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+          <div className="flex items-center gap-2 text-purple-400 border-b border-slate-800/80 pb-3">
             <Code2 className="w-5 h-5" />
-            <h3 className="text-sm font-bold text-white">Technical Stack</h3>
+            <h3 className="text-sm font-bold text-white">Technical Skills</h3>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 text-xs">
             <div>
-              <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1.5">Frontend & UI</span>
-              <div className="flex flex-wrap gap-1.5">
-                {['React.js', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vite', 'HTML5/CSS3'].map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-purple-300 font-mono">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <span className="text-[10px] font-mono uppercase text-slate-500 block mb-1">Languages</span>
+              <p className="text-slate-300 font-mono leading-relaxed">C++, Java, C, Python, HTML, CSS, JavaScript, SQL</p>
             </div>
-
             <div>
-              <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1.5">Backend & Cloud</span>
-              <div className="flex flex-wrap gap-1.5">
-                {['Node.js', 'Express', 'Python', 'Vercel API', 'REST / GraphQL', 'Git & GitHub'].map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-cyan-300 font-mono">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <span className="text-[10px] font-mono uppercase text-slate-500 block mb-1">Cloud & Design</span>
+              <p className="text-slate-300 font-mono leading-relaxed">AWS, Google Cloud Platform, UI/UX Design</p>
             </div>
-
             <div>
-              <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1.5">AI & Tooling</span>
-              <div className="flex flex-wrap gap-1.5">
-                {['Gemini AI', 'OpenAI APIs', 'Prompt Eng', 'Figma', 'Postman'].map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-emerald-300 font-mono">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <span className="text-[10px] font-mono uppercase text-slate-500 block mb-1">AI & ML</span>
+              <p className="text-slate-300 font-mono leading-relaxed">Predictive Modeling, Feature Eng, Model Eval, Gen AI</p>
             </div>
           </div>
         </div>
 
-        {/* Featured Projects & Experience */}
+        {/* Certifications */}
         <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
-          <div className="flex items-center gap-2 text-indigo-400">
-            <Briefcase className="w-5 h-5" />
-            <h3 className="text-sm font-bold text-white">Featured Projects</h3>
+          <div className="flex items-center gap-2 text-cyan-400 border-b border-slate-800/80 pb-3">
+            <Cloud className="w-5 h-5" />
+            <h3 className="text-sm font-bold text-white">Certifications</h3>
           </div>
 
-          <div className="space-y-3">
-            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-              <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-white">Polyinnovae Application Site</h4>
-                <span className="text-[10px] text-purple-400 font-mono">Vercel Live</span>
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
-                Full-stack interactive portfolio built for Polyinnovae AI, featuring live photo upload, video intro, resume download, and polymath essay.
-              </p>
+          <ul className="space-y-2.5 text-xs text-slate-300">
+            <li className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 shrink-0" />
+              <span><strong>AWS Certified Solutions Architect</strong> – Associate (SAA-C03)</span>
+            </li>
+            <li className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+              <span><strong>AWS Academy Graduate</strong> – Cloud Foundations</span>
+            </li>
+            <li className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+              <span><strong>Oracle Cloud Infrastructure</strong> – Certified Foundations</span>
+            </li>
+            <li className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+              <span><strong>Google Cloud</strong> – Career Launchpad</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Achievements & Coding Profiles */}
+        <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+          <div className="flex items-center gap-2 text-amber-400 border-b border-slate-800/80 pb-3">
+            <Trophy className="w-5 h-5" />
+            <h3 className="text-sm font-bold text-white">Achievements & Profiles</h3>
+          </div>
+
+          <div className="space-y-3 text-xs">
+            <div className="p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+              <span className="font-bold text-amber-300 block">🏆 Hyper API Hackathon 2025</span>
+              <p className="text-[11px] text-slate-300">Secured <strong>Top 5 Finalist</strong> position among 50+ technical teams.</p>
             </div>
 
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-              <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-white">AI-Powered Web Apps</h4>
-                <span className="text-[10px] text-cyan-400 font-mono">React / Node</span>
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
-                Intelligent user interfaces with responsive layout algorithms and modern dark-mode aesthetic.
-              </p>
+              <span className="font-bold text-emerald-400 block">🏸 Regional Badminton Player</span>
+              <p className="text-[11px] text-slate-400">Competed at the regional level in badminton.</p>
             </div>
-          </div>
 
-          <div className="pt-2 flex items-center justify-between text-xs text-emerald-400 font-medium">
-            <span className="flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              Requirement 3/4 Verified
-            </span>
+            <div className="pt-1 flex items-center justify-between text-slate-400 font-mono text-[11px]">
+              <span>LeetCode: <strong className="text-purple-300">Soumya21s</strong></span>
+              <span>CodeChef: <strong className="text-cyan-300">soumya0818</strong></span>
+            </div>
           </div>
         </div>
 
