@@ -6,10 +6,11 @@ import IntroVideo from './components/IntroVideo';
 import ResumeSection from './components/ResumeSection';
 import VercelChecklist from './components/VercelChecklist';
 import { Sparkles, Heart } from 'lucide-react';
+import profilePhoto from './assets/profile.jpg';
 
 export default function App() {
-  // Requirement 1: Photo state (default placeholder or uploaded)
-  const [photoUrl, setPhotoUrl] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80');
+  // Requirement 1: Photo state (default uploaded profile photo)
+  const [photoUrl, setPhotoUrl] = useState(profilePhoto);
 
   // Requirement 2: Intro video state
   const [videoUrl, setVideoUrl] = useState('');
@@ -24,7 +25,7 @@ export default function App() {
 
   // Form info pre-filled matching user's image details
   const [userInfo, setUserInfo] = useState({
-    fullName: "Polymath Builder",
+    fullName: "Soumya",
     college: "Nagarjuna college of engineering and technology",
     phone: "+91 8861853669",
     dob: "02/09/2005"
